@@ -1,14 +1,15 @@
-const palindromes = function (array) {
-    let cleanArray = (array.replace(/[^a-zA-Z0-9]/g, "")).toLowerCase();
-    let rightSideArray = cleanArray.length - 1;
+const palindromes = function (string) {
+    const alphanumerical = "abcdefghijklmnopqrstuvwxyz0123456789";
 
-    for(let i = 0; i < cleanArray.length / 2; i++){
-        if(cleanArray[i] !== cleanArray[rightSideArray]){
-            return false;
-        }
-        rightSideArray--;
-    }
-    return true;
+    const cleanString = string
+    .toLowerCase()
+    .split("")
+    .filter((character) => alphanumerical.includes(character))
+    .join("");
+
+    const reverseString = cleanString.split("").reverse().join("")
+
+    return cleanString === reverseString
 };
 
 // Do not edit below this line
