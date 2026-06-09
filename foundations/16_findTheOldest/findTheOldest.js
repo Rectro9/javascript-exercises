@@ -1,24 +1,15 @@
 const findTheOldest = function(people) {
+    function ageCal(person){
+        let endYear = person.yearOfDeath ?? new Date().getFullYear()
+
+        return endYear - person.yearOfBirth 
+    }
+
     return people.reduce((accumulate, current) => {
-        const missingYear = new Date().getFullYear()
+        let accumulateAge = ageCal(accumulate)
+        let currentAge = ageCal(current)
 
-        let accumulateAge = accumulate.yearOfDeath - accumulate.yearOfBirth
-        let currentAge = current.yearOfDeath - current.yearOfBirth
-
-        if(!accumulate.yearOfDeath){
-            accumulateAge = missingYear - accumulate.yearOfBirth
-        }
-        
-        if(!current.yearOfDeath){
-            currentAge = missingYear - current.yearOfBirth
-        }
-
-        if(currentAge > accumulateAge){
-            return current
-        }
-        else {
-            return accumulate
-        }
+        return currentAge > accumulateAge ? current : accumulate
     })
 };
 
